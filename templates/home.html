@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="posts">
+    {% for post in post_list %}
+        <section class="post">
+            <header class="post-header">
+                {# 在博客文章的增加一个链接, 链接的href属性为"{% url "detail" id=post.id %}", 当点击这个文章题目时,      #}
+                {# 会将对应的数据库对象的id传入的url中, 类似于url传参.这里将数据库对象唯一的id传送给url设置 ,#}
+                {#  url取出这个id给对应的view中的函数逻辑当做参数. 这样这个id就传入对应的参数中被使用 #}
+                <h2 class="post-title"><a href="{% url "detail" article_id=post.id %}">{{ post.title }}</a></h2>
+                    <p class="post-meta">
+                        Time:  <a class="post-author" href="#">{{ post.date_time }}</a>
+                        <a class="post-category post-category-js" href="{% url 'search_tag' post.category %}">{{ post.category }}</a>
+                    </p>
+            </header>
+
+                <div class="post-description">
+                    <p>
+                        {{ post.content|truncatechars_html:50 }}
+                    </p>
+                </div>
+                <a class="pure-button" href="{% url 'detail' article_id=post.id %}">Read More>></a>
+        </section>
+    {% endfor %}
+</div><!-- /.blog-post -->
+{% endblock %}

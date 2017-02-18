@@ -23,5 +23,23 @@
                 <a class="pure-button" href="{% url 'detail' article_id=post.id %}">Read More>></a>
         </section>
     {% endfor %}
+
+{# 分页实现 #}
+    {% if post_list.object_list and post_list.paginator.num_pages > 1 %}
+      <div>
+      <ul  class="this-page" >
+
+          {% if post_list.has_previous %}
+            <li><a class="pure-button" href="?page={{ post_list.previous_page_number }}">上一页</a></li>
+          {% endif %}
+
+          {% if post_list.has_next %}
+            <li><a class="pure-button" href="?page={{ post_list.next_page_number }}">下一页</a></li>
+          {% endif %}
+      </ul>
+      </div>
+    {% endif %}
+{# 分页实现 #}
+
 </div><!-- /.blog-post -->
 {% endblock %}

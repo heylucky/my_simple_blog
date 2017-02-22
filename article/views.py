@@ -45,7 +45,7 @@ class ArchivesView(View):
                                                  'error': False})
 
 
-def search_tag(request, tag) :
+def search_tag(request, tag):
     try:
         post_list = Article.objects.filter(category__iexact = tag) #contains
     except Article.DoesNotExist :

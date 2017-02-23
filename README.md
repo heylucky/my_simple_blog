@@ -9,3 +9,5 @@ Blog界面采用轻量级的Pure（https://purecss.cn/layouts.html）
 评论系统采用的是 多说评论系统（http://duoshuo.com/）
 后续添加注册/登录，找回密码等功能。
 
+## employ the project
+ubuntu16.04 + nginx + uWSGI

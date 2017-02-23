@@ -23,7 +23,7 @@ from article.views import ArticleView,ArticlePage,ArchivesView,AboutmeView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^home/$',ArticleView.as_view(),name='home'),
+    url(r'^$',ArticleView.as_view(),name='home'),
     url(r'^home/(?P<article_id>\d+)/$', ArticlePage.as_view(), name='detail'),
     url(r'^archives/$', ArchivesView.as_view(), name = 'archives'),
     url(r'^tag/(?P<tag>\w+)/$', 'article.views.search_tag', name = 'search_tag'),

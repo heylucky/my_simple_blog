@@ -1,5 +1,5 @@
 from django.contrib import admin
-from models import Article
+from models import Article,UserProfile
 
 
 class ArticleAdmin(admin.ModelAdmin):
@@ -8,5 +8,13 @@ class ArticleAdmin(admin.ModelAdmin):
                     "category",
                     )
 
-admin.site.register(Article,ArticleAdmin)
 
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('username',
+                    "email",
+                    "password",
+                    )
+
+
+admin.site.register(Article,ArticleAdmin)
+admin.site.register(UserProfile,UserAdmin)

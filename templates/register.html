@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+
+    <link rel="stylesheet" href="/static/css/forms.css">
+    <link rel="stylesheet" href="/static/css/forms-min.css">
+    <link rel="stylesheet" href="/static/css/forms-nr.css">
+
+    <link rel="stylesheet" href="/static/css/buttons.css">
+    <link rel="stylesheet" href="/static/css/buttons-min.css">
+    <link rel="stylesheet" href="/static/css/buttons-core.css">
+
+</head>
+<body>
+<form class="pure-form pure-form-aligned" method="post" action="{% url 'register' %}">
+    <fieldset>
+        <div class="pure-control-group">
+            <label for="name">User</label>
+            <input id="name" type="text" name="username" placeholder="Username" >
+        </div>
+
+        <div class="pure-control-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" placeholder="Password" >
+        </div>
+
+        <div class="pure-control-group">
+            <label for="password">Confirm Password</label>
+            <input  type="password" name="confirm_password" placeholder="Password" >
+        </div>
+
+        <div class="pure-control-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="Email Address" >
+        </div>
+
+{#        <div class="pure-control-group">#}
+{#            <label for="foo">Supercalifragilistic Label</label>#}
+{#            <input id="foo" type="text" placeholder="Enter something here...">#}
+{#        </div>#}
+
+        <div class="pure-controls">
+            <label for="cb" class="pure-checkbox">
+                <input id="cb" type="checkbox" name="agree"> 阅读并同意协议
+            </label>
+
+            <button type="submit" class="pure-button pure-button-primary">Sign up</button>
+            <br>
+            <a href="{% url 'home' %}"><small>回到主页</small></a>
+{#            <div>{{ register_form.errors }}</div>#}
+            <div>{% for keys,error in register_form.errors.items %}{{ keys }}:{{ error }}{% endfor %}{{ msg }}</div>
+        </div>
+    </fieldset>
+    {% csrf_token %}
+</form>
+</body>
+</html>

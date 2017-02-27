@@ -18,7 +18,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.views.generic import TemplateView       # 专门用于静态文件
 
-from article.views import ArticleView,ArticlePage,ArchivesView,AboutmeView
+from article.views import ArticleView,ArticlePage,ArchivesView,AboutmeView,LoginView,RegisterView
 
 
 urlpatterns = [
@@ -28,5 +28,8 @@ urlpatterns = [
     url(r'^archives/$', ArchivesView.as_view(), name = 'archives'),
     url(r'^tag/(?P<tag>\w+)/$', 'article.views.search_tag', name = 'search_tag'),
     url(r'^aboutme/$', AboutmeView.as_view(), name = 'aboutme'),
+    url(r'^login/$', LoginView.as_view(), name = 'login'),
+    url(r'^reg/$', RegisterView.as_view(), name = 'register'),
+
     # url(r'^search/$','article.views.blog_search', name = 'search'),
 ]

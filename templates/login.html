@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="/static/css/forms.css">
+    <link rel="stylesheet" href="/static/css/forms-min.css">
+    <link rel="stylesheet" href="/static/css/forms-nr.css">
+
+    <link rel="stylesheet" href="/static/css/buttons.css">
+    <link rel="stylesheet" href="/static/css/buttons-min.css">
+    <link rel="stylesheet" href="/static/css/buttons-core.css">
+</head>
+<body>
+<form class="pure-form pure-form-stacked" method="post" action="{% url 'login' %}">
+    <fieldset>
+        <legend>用户登录</legend>
+
+{#        <label for="email">Email</label>#}
+{#        <input id="email" type="email" placeholder="Email" name="email">#}
+        <label>Username</label>
+        <input  placeholder="username" name="username">
+
+        <label for="password">Password</label>
+        <input id="password" type="password" placeholder="Password" name="password">
+
+{#        <label for="state">State</label>#}
+{#        <select id="state">#}
+{#            <option>AL</option>#}
+{#            <option>CA</option>#}
+{#            <option>IL</option>#}
+{#        </select>#}
+
+        <label for="remember" class="pure-checkbox">
+            <input id="remember" type="checkbox"> Remember me
+        </label>
+
+        <button type="submit" class="pure-button pure-button-primary">Sign in</button>
+        <br>
+        <a href="{% url 'register' %}"><small>没有账号？注册</small></a>
+        <div>{% for keys,error in login_form.errors.items %}{{ keys }}:{{ error }}{% endfor %}{{ msg }}</div>
+
+    </fieldset>
+    {% csrf_token %}
+</form>
+</body>
+</html>

@@ -12,7 +12,7 @@ class ArticleAdmin(admin.ModelAdmin):
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username',
                     "email",
-                    "password",
+                     # "password",
                     )
 
 

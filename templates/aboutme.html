@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 {% extends "base.html" %}
-
+{% load staticfiles %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,7 +14,7 @@
 <div class="posts">
         <section class="post">
             <header class="post-header">
-                <h2 class="post-title">关于自我介绍</h2>
+                <h1 class="post-title">关于我</h1>
 
                     <p class="post-meta">
 
@@ -23,11 +23,12 @@
 
                 <div class="post-description">
                     <p>
-                        2222222222222222222
+                        <h3><strong>既然做出了选择，不过多么艰难，自己选的路，哭着也要走下去，毕竟还有诗和远方</strong></h3>
                     </p>
                 </div>
-        </section>
 
+        </section>
+   <img src="/static/img/myphoto.jpg" alt="myphoto"/>
 </div><!-- /.blog-post -->
 {% endblock %}
 

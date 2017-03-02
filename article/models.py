@@ -31,14 +31,17 @@ class UserProfile(models.Model):
     email = models.EmailField(verbose_name=u'邮箱',max_length = 50)
     mobile = models.CharField(verbose_name=u'手机号码',max_length=11,null=True)
     gender = models.CharField(verbose_name=u'性别',choices=(('male','男性'),('female','女性')),max_length=6,default='male')
-    password = models.CharField(max_length=11,null= True)
+    # password = models.CharField(max_length=11,null= True)
 
     # 获取URL并转换成url的表示格式
-
-
     class Meta:
         verbose_name=u'用户信息'
         verbose_name_plural= '用户信息'
 
     def __unicode__(self):
         return self.username
+
+
+class Welcome(models.Model):
+    title = models.CharField(max_length=100,null=True)
+    content = models.TextField(verbose_name=u'自我描述')

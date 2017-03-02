@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from django.views.generic import View
 from django.http import Http404
+from django.http import HttpResponseRedirect    # 重定向
 from django.core.paginator import PageNotAnInteger,Paginator,EmptyPage
 from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password       # 对明文密码进行加密
@@ -74,15 +75,15 @@ class RegisterView(View):
             if pwd != pwd2:
                 return render(request, "register.html",{"msg":u"密码不一致"})
 
-            user_name = request.POST.get("email", "")  # 值“”默认是空,此时获取的user_name为邮箱地址
-            if UserProfile.objects.filter(email=user_name):
+            email = request.POST.get("email", "")  # 值“”默认是空,
+            user_name = request.POST.get("username", "")
+            if UserProfile.objects.filter(username=user_name):
                 return render(request,"register.html",{"register_form": register_form,"msg":"用户已存在!!!"})
             pass_word = request.POST.get("password", "")
             user_profile = UserProfile()
             user_profile.username = user_name       # user_name 默认为邮箱
-            user_profile.email = user_name
+            user_profile.email = email
             # user_profile.is_active = False
-            # user_profile.password = make_password(pass_word)
             user_profile.password = make_password(pass_word)
             user_profile.save()             # 保存到数据库当中。
             return render(request,"login.html")
@@ -97,15 +98,15 @@ class LoginView(View):
         return render(request,'login.html',{})
 
     def post(self,request):
-        login_form=LoginForm(request.POST)
+        login_form=LoginForm(request.POST)      # request 是个quiryset，POST是字典
         if login_form.is_valid():       # 实际是检查_errors是否为空，为空说明正常,与数据库对比
-            username = request.POST.get("username", "")  # 值“”默认是空
-            password = request.POST.get("password", "")
-            user = authenticate(username=username, password=password)  # 形参是固定的不能修改
+            user_name = request.POST.get("username", "")  # 值“”默认是空
+            pass_word = request.POST.get("password", "")
+            user = authenticate(username=user_name, password=pass_word)  # 形参是固定的不能修改
             if user is not None:
                 # if user.is_active:
-                    login(request, user)  # 完成login登录,下面跳到首页
-                    return render(request, "home.html", {})   # 跳到首页
+                    login(request, user)  # 完成login登录
+                    return render(request, "aboutme.html")   # 跳到aboutme
                 # else:
                 #     return render(request,"login.html",{"msg":"用户未激活"})
             else:
@@ -115,3 +116,12 @@ class LoginView(View):
                 return render(request,"login.html",{"msg":"用户名或密码出错"})
         else:
             return render(request, "login.html",{"login_form" : login_form})
+
+
+class LogoutView(View):
+    def get(self,request):
+        logout(request)
+        from django.core.urlresolvers import reverse    # url 与name的转换
+        return HttpResponseRedirect(reverse("home"))
+
+

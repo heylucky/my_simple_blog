@@ -26,8 +26,8 @@
         <div class="header">
 {#                        <button style="position: relative;  left: 30px; top: 20px;">linyuelin</button>#}
             {% if request.user.is_authenticated %}
-                <a class="" href="#">{{ request.user.username }}</a>
-                <a class="" href="{% url 'logout' %}">退出</a>
+                <a class="" style="position: relative;left: -152px; top: -275px;" href="#">{{ request.user.username }}</a>
+                <a class="pure-button" style="position: relative;background: rgb(66, 184, 220);left: -152px; top: -275px;" href="{% url 'logout' %}">退出</a>
             {% else %}
                 <a class="pure-button" style="position: relative;background: rgb(66, 184, 220);left: -214px; top: -275px;" href="{% url 'login' %}" target="_blank">登录/注册</a>
             {% endif %}
